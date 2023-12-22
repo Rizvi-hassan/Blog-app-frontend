@@ -1,20 +1,51 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 const Navbar = () => {
+
+  const navigate = useNavigate();
+
+  const showHide = () => {
+    document.getElementById('name').classList.toggle('show')
+  }
+
+  const goToAdd = () => {
+    navigate('/add-blog')
+  }
+
+  const handleLogOut = ()=>{
+    localStorage.clear();
+    navigate('/auth/login');
+  }
+
   return (
     <div className="nav-bar">
-        <div className="title">B_LOG</div>
-        <div className="links">
-            <ul>
-                <li><a className="hover transition" href="/">Home</a></li>
-                <li><a className="hover transition" href="/">Daily updates</a></li>
-                <li><a className="hover transition" href="/">Tutorials</a></li>
-                <li><a className="hover transition" href="/">About</a></li>
-            </ul>
-        </div>
-        <div className="search-box">
-            <button className="btn-primary transition">Subscribe</button>
-        </div>
+      <div className="title">B_LOG</div>
+      <div className="links">
+        <ul>
+          <li><Link className="hover transition" to="/">Home</Link></li>
+          <li><Link className="hover transition" to="/">Daily updates</Link></li>
+          <li><Link className="hover transition" to="/">Tutorials</Link></li>
+          <li><Link className="hover transition" to="/">About</Link></li>
+        </ul>
+      </div>
+      <div className="search-box">
+        {!localStorage.getItem('token') ?<> 
+          <button className="btn-primary transition" onClick={()=>navigate('/auth/register')}>Register</button>
+          <button className="btn-primary transition" onClick={()=>navigate('/auth/login')}>Login</button>
+          </> : <>
+          <button className="btn-primary transition" onClick={goToAdd}>Add Blog <i className="fa-solid fa-plus icon" style={{ padding: '0' }}></i></button>
+            <div className="user" id="user" onClick={showHide}>
+              <div className="user-icon"><i className="fa-solid fa-user" style={{ color: 'white', fontSize: '1.5rem' }}></i></div>
+              <div className="name" id="name" >Md Rizvi Hassan Ansari
+                <button className="btn-danger transition" onClick={handleLogOut} >Logout</button>
+              </div>
+            </div>
+          </>
+        }
+
+      </div>
     </div>
   )
 }

@@ -27,7 +27,9 @@ const Page = () => {
             <div className="container">
                 <span className="tag">DESIGN TOOLS</span>
                 <span className="date">August 13, 2023</span>
+                <span className="author"> &#8213; Md Rizvi Hassan Ansari</span>
                 <h1 className="main-heading">{data.head}</h1>
+
                 <p className="paragraph">{data.title}</p>
                 {data.elements.map((element) => {
 
