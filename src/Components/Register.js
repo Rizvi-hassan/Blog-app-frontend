@@ -5,7 +5,7 @@ import userContext from '../Contexts/user/userContext'
 
 const Register = () => {
     const context = useContext(userContext);
-    const {showAlert} = context;
+    const {showAlert, url} = context;
     const navigate = useNavigate();
     const [creds, setCreds] = useState({name:"", email:"", password:"", cpassword:""})
     const handleChange = (e)=>{
@@ -14,7 +14,7 @@ const Register = () => {
     const handleSubmit = async(e)=>{
         e.preventDefault();
         if(creds.password === creds.cpassword){
-            const response = await fetch(`http://localhost:5000/auth/adduser`, {
+            const response = await fetch(`${url}/auth/adduser`, {
                 method: "POST",
     
                 headers: {
@@ -26,13 +26,11 @@ const Register = () => {
             });
             const json = await response.json();
             if (json.attempt === 'success'){
-                console.log('success');
-                localStorage.setItem('token', json.token);
+                localStorage.setItem('blog-token', json.token);
                 showAlert('success', 'Registration successfull. Welcome to B_LOG family.');
                 navigate('/');
             }
             else{
-                console.log('fail');
                 console.log(json.errors);
                 if (Array.isArray(json.errors)){
                     showAlert('fail', json.errors[0].msg);
@@ -70,7 +68,7 @@ const Register = () => {
                 <h1 style={{ color: 'white', marginBottom: '1rem', fontSize: '3rem' }}>Register</h1>
                 <div className="content-box">
                     <form action="post" className="form">
-                        <i id="eye" class="fa-solid fa-eye hide-show2" onClick={toggleHideShow}></i>
+                        <i id="eye" className="fa-solid fa-eye hide-show2" onClick={toggleHideShow}></i>
                         <input type="text" className="form-entry" id='name' name='name' value={creds.name} onChange={handleChange} placeholder="Enter your name"/>
                         <input type='email' className="form-entry" id='email' name='email' value={creds.email} onChange={handleChange} placeholder='Enter your email' />
                         <input type="password" className="form-entry" id='pass' name='password' value={creds.password} onChange={handleChange} placeholder='Enter your password' />

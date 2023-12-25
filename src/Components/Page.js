@@ -1,35 +1,39 @@
-import React, { createElement } from 'react'
+import React, { createElement, useContext } from 'react'
 import Navbar from './Navbar'
-// import image from '../images/blog-image.png'
-// import image2 from '../images/big.png'
+import DateObject from "react-date-object";
 import { useNavigate } from 'react-router'
+import userContext from '../Contexts/user/userContext'
 
 const Page = () => {
+    const context = useContext(userContext);
+    const {blog} = context;
+    const date = new DateObject(blog.data.date);
     const navigate = useNavigate();
     let key = 0;
-    const data = {
-        head: "10 Hilarious Cartoons That Depict Real-Life Problems of Programmers",
-        title: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A odit quis sint, repudiandae totam sapiente atque delectus maxime ex cupiditate? Quos saepe nihil porro voluptate suscipit dolore ex accusamus excepturi qui, autem omnis nisi non fuga dolorem ipsum ipsa soluta illo molestias velit perspiciatis maiores reiciendis recusandae. Ipsum, vitae iste.",
-        elements: [
-            ['h2', 'What is React Js'],
-            ['p', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis voluptate repellendus tenetur ad non labore corporis molestiae quis nemo velit?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est a laborum temporibus voluptatibus ab labore inventore eum? Sunt error repellendus aspernatur iure vitae, voluptatum, exercitationem hic natus eveniet ratione quidem, nam ipsum voluptate saepe eius soluta! Cumque perspiciatis possimus minima quos placeat autem vitae provident vero ab similique, quis culpa ad consequuntur temporibus, nam illum deleniti. Tempore alias velit minus.'],
-            ['img', 'https://i.ibb.co/Pz4VPLN/big.jpg'],
-            ['h2', 'What is lorem'],
-            ['p', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur impedit iste explicabo molestias architecto cumque iure deleniti velit voluptatum ipsa doloribus nesciunt reiciendis earum, voluptate excepturi unde voluptatem eum delectus! Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia illo dolorum sit quis aliquam! Commodi, laborum. Laboriosam quidem similique dolor quos? Quibusdam veniam doloribus similique voluptatem explicabo distinctio iure ea.']]
-    }
+    // const data = {
+    //     head: "10 Hilarious Cartoons That Depict Real-Life Problems of Programmers",
+    //     title: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A odit quis sint, repudiandae totam sapiente atque delectus maxime ex cupiditate? Quos saepe nihil porro voluptate suscipit dolore ex accusamus excepturi qui, autem omnis nisi non fuga dolorem ipsum ipsa soluta illo molestias velit perspiciatis maiores reiciendis recusandae. Ipsum, vitae iste.",
+    //     elements: [
+    //         ['h2', 'What is React Js'],
+    //         ['p', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis voluptate repellendus tenetur ad non labore corporis molestiae quis nemo velit?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est a laborum temporibus voluptatibus ab labore inventore eum? Sunt error repellendus aspernatur iure vitae, voluptatum, exercitationem hic natus eveniet ratione quidem, nam ipsum voluptate saepe eius soluta! Cumque perspiciatis possimus minima quos placeat autem vitae provident vero ab similique, quis culpa ad consequuntur temporibus, nam illum deleniti. Tempore alias velit minus.'],
+    //         ['img', 'https://i.ibb.co/Pz4VPLN/big.jpg'],
+    //         ['h2', 'What is lorem'],
+    //         ['p', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur impedit iste explicabo molestias architecto cumque iure deleniti velit voluptatum ipsa doloribus nesciunt reiciendis earum, voluptate excepturi unde voluptatem eum delectus! Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia illo dolorum sit quis aliquam! Commodi, laborum. Laboriosam quidem similique dolor quos? Quibusdam veniam doloribus similique voluptatem explicabo distinctio iure ea.']]
+    // }
+    const data = blog.data;
     const handleBack = () => {
-        navigate('/');
+        navigate(-1);
     }
     return (
         <div>
             <Navbar />
                 <i className="fa-solid fa-left-long back" onClick={handleBack}></i>
             <div className="container">
-                <span className="tag">DESIGN TOOLS</span>
-                <span className="date">August 13, 2023</span>
-                <span className="author"> &#8213; Md Rizvi Hassan Ansari</span>
+                <span className="tag">{data.tag}</span>
+                <span className="date">{date.format("MMMM DD, YYYY")}</span>
+                <span className="author"> &#8213; {data.author}</span>
                 <h1 className="main-heading">{data.head}</h1>
-
+                <img src={data.mainImg} alt="error" className="image-main"/>
                 <p className="paragraph">{data.title}</p>
                 {data.elements.map((element) => {
 

@@ -12,6 +12,8 @@ import UserState from './Contexts/user/userState'
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Alert from './Components/Alert';
+import YourBlogs from './Components/YourBlogs'
+import EditBlog from './Components/EditBlog';
 
 function App() {
   return (
@@ -21,8 +23,9 @@ function App() {
           <Alert/>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/personal' element={<YourBlogs />} />
             <Route path='/blog-page' element={<Page />} />
-            <Route path='/add-blog' element={<Addblog />} />
+            <Route path='/add-blog' element={<EditBlog />} />
             <Route path='/auth/login' element={<Login/>}/>
             <Route path='/auth/register' element={<Register/>} />
           </Routes>

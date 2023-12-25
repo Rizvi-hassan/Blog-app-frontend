@@ -5,7 +5,7 @@ import userContext from '../Contexts/user/userContext'
 
 const Login = () => {
     const context = useContext(userContext);
-    const {showAlert} = context;
+    const {showAlert, url, fetchName} = context;
     const navigate = useNavigate();
     const [creds, setCreds] = useState({email:"", password:""});
     const handleChange = (e)=>{
@@ -14,8 +14,7 @@ const Login = () => {
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        console.log(creds);
-        const response = await fetch(`http://localhost:5000/auth/login`, {
+        const response = await fetch(`${url}/auth/login`, {
                 method: "POST",
     
                 headers: {
@@ -27,14 +26,13 @@ const Login = () => {
             });
         const json = await response.json();
         if (json.attempt === 'success'){
-            console.log('success');
-            localStorage.setItem('token', json.token);
+            localStorage.setItem('blog-token', json.token);
             showAlert('success', 'Logged in successfully. Welcome back to B_LOG');
+            fetchName();
             navigate('/');
         }
         else{
             console.log('fail');
-            // console.log(json.errors);
             if(Array.isArray(json.errors)){
                 showAlert('fail', json.errors[0].msg);
             }
@@ -65,7 +63,7 @@ const Login = () => {
                 <h1 style={{ color: 'white', marginBottom: '1rem', fontSize: '3rem' }}>Login</h1>
                 <div className="content-box">
                     <form action="post" className="form" onSubmit={handleSubmit}>
-                        <i id="eye" class="fa-solid fa-eye hide-show" onClick={toggleHideShow}></i>
+                        <i id="eye" className="fa-solid fa-eye hide-show" onClick={toggleHideShow}></i>
                         <input type='email' className="form-entry" name='email' value={creds.email} onChange={handleChange} placeholder='Enter your email' />
                         <input type="password" id="password" className="form-entry" name='password' value={creds.password} onChange={handleChange} placeholder='Enter your password' required/>
                         <input type="submit" className="form-btn green" value='Login' />

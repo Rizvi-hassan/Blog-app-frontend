@@ -1,29 +1,43 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import DateObject from "react-date-object";
+import userContext from '../Contexts/user/userContext';
 
 
-const Tile = () => {
-  // const navigate = useNavigate();
-  
+
+const Tile = (props) => {
+  const navigate = useNavigate();
+  const context = useContext(userContext);
+  const { newBlog } = context;
+  const { data } = props;
+  const date = new DateObject(data.date);
+
+  const handleClick = () => {
+    console.log(data);
+    newBlog(data, false);
+    navigate('/blog-page');
+  }
+
+
   return (
     <div className="tile">
 
-        <div className="tile-body">
-          <div className="content">
-            
-          <span className="tag">DESIGN TOOLS</span>
-            <span className="date">August 13, 2023</span>
-            <h3>10 Hilarious Cartoons That Depict Real-Life Problems of Programmers</h3>
-            <p className="desc">Redefined the user acquisition and redesigned the onboarding experience, all within 3 working weeks.</p>
-            <Link to='/blog-page' style={{fontWeight: '700', textDecoration:'none'}}>Read More <i class="fa-solid fa-square-up-right"></i></Link>
-            <span className="author"> &#8213; Md Rizvi Hassan Ansari</span>
-          </div>
-          <div className="image">
+      <div className="tile-body">
+        <div className="content">
 
-          </div>
+          <span className="tag">{data.tag}</span>
+          <span className="date">{date.format("MMMM DD, YYYY")}</span>
+          <h3>{data.head}</h3>
+          <p className="desc">{(data.title.length > 130) ? data.title.substring(0, 129) + "..." : data.title}</p>
+          <span onClick={handleClick} style={{ fontWeight: '700', textDecoration: 'none', cursor: 'pointer' }}>Read More <i className="fa-solid fa-square-up-right"></i></span>
+          <span className="author"> &#8213; {data.author}</span>
         </div>
+        <img src={data.mainImg} alt='img' className="image"></img>
 
       </div>
+    </div>
+
+    // </div >
   )
 }
 

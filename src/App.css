@@ -25,27 +25,34 @@
 
 .header {
     width: 95vw;
-    height: 25rem;
+    min-height: 50vh;
+    max-height: 90vh;
     /* flex-shrink: 0; */
     border-radius: 0.5rem;
     background: #232e52;
     display: flex;
     flex-direction: column;
     margin: 1rem auto;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
 
 .content-main {
     width: 70%;
-    color: white;
     font-family: Graphik;
-    font-size: 52px;
+    font-size: 2rem;
     font-style: normal;
     font-weight: 700;
     line-height: 120%; /* 62.4px */
-    letter-spacing: -1.56px;
-    margin-bottom: 5rem;
+    margin: 3rem auto;
+}
+.content-quote{
+    color: white;
+}
+.content-author{
+    color: white;
+    font-size: 1rem;
+    text-align: right;
 }
 
 .nav-bar {
@@ -166,10 +173,8 @@
 }
 
 .tile-body .image {
-    /* border: 2px solid red; */
-    background: url("./images/blog-image.png") no-repeat;
     width: 30%;
-    background-size: cover;
+    object-fit: cover;
 }
 
 .main-heading {
@@ -182,7 +187,9 @@
 }
 
 .img-blog {
-    max-width: 70vw;
+    max-width: 45vw;
+    display: block;
+    margin: 2rem auto;
 }
 
 .back {
@@ -425,4 +432,18 @@
 
 .hide-show2{
     top: 20rem;
+}
+
+.image-main{
+    width: 70vw;
+    height: 40vw;
+    object-fit: contain;
+}
+
+.foot{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-top: 1rem;
 }
