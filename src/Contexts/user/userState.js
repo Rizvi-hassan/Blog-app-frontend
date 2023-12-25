@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import userContext from './userContext'
 
-const QUOTE_API = "+OiyO57BRGCLn0pD+uXe0g==UOCCpQbV6cATbefJ";
 
 const UserState = (props) => {
     // const navigate = useNavigate();
@@ -9,9 +8,8 @@ const UserState = (props) => {
     const [alert, setAlert] = useState(null);
     const [blog, setBlog] = useState({});
     const [name, setName] = useState('');
-    const [quote, setQuote] = useState(null);
     const [edit, setEdit] = useState({ _id: '', head: '', author: name, title: '', mainImg: '', tag: '', elements: [], isnew: true });
-    const url = 'http://localhost:5000';
+    const url = 'https://blog-app-backend-fr80.onrender.com';
     const showAlert = (type, msg) => {
         setAlert({ state: true, type, msg })
         setTimeout(() => {
@@ -50,27 +48,7 @@ const UserState = (props) => {
         }
     }
 
-    const fetchquote = async () => {
-        try {
-            const response = await fetch('https://api.api-ninjas.com/v1/quotes?category=happiness', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Api-Key': QUOTE_API
-                }
-            });
-            const out = await response.json();
-            let temp = await out[0];
-            await setQuote(temp.quote, temp.author);
-            await console.log(temp);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    if(!quote){
-        fetchquote();
-    }
+    
 
     return (
         <userContext.Provider value={{ showAlert, alert, url, blog, newBlog, name, fetchName, newEdit, edit }}>

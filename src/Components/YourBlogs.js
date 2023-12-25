@@ -47,7 +47,7 @@ const YourBlogs = () => {
       <Header/>
       <div className="container">
           <h2>Your Blogs</h2>
-          {blogs.length === 0 && <h4>You have not published a blog yet.</h4>}
+          {(blogs.length === 0) && <div className='loading'></div>}
           {blogs.length !== 0 && blogs.map((data) =>{
               return <TilePersonal key={data._id} data = {data} fetchdata = {fetchdata}/>
           })}
