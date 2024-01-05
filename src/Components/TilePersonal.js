@@ -14,7 +14,7 @@ const TilePersonal = (props) => {
     const handleClick = (val) => {
         console.log(val);
         newBlog(val, false);
-        navigate('/blog-page');
+        navigate(`/page/${data._id}`);
     }
 
     const handleDelete = async(e) =>{
@@ -37,7 +37,7 @@ const TilePersonal = (props) => {
     const handleChange = ()=>{
         console.log("Change working");
         newEdit(data);
-        navigate('/add-blog');
+        navigate('/editblog');
     }
 
     return (

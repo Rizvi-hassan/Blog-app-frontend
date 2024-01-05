@@ -14,12 +14,12 @@ const Navbar = () => {
   }
 
   const goToAdd = () => {
-    navigate('/add-blog')
+    navigate('/editblog')
   }
 
   const handleLogOut = () => {
     localStorage.clear();
-    navigate('/auth/login');
+    navigate('/login');
   }
 
   return (
@@ -35,8 +35,8 @@ const Navbar = () => {
       </div>
       <div className="search-box">
         {!localStorage.getItem('blog-token') ? <>
-          <button className="btn-primary transition" onClick={() => navigate('/auth/register')}>Register</button>
-          <button className="btn-primary transition" onClick={() => navigate('/auth/login')}>Login</button>
+          <button className="btn-primary transition" onClick={() => navigate('/register')}>Register</button>
+          <button className="btn-primary transition" onClick={() => navigate('/login')}>Login</button>
         </> : <>
           <button className="btn-primary transition" onClick={goToAdd}>Add Blog <i className="fa-solid fa-plus icon" style={{ padding: '0' }}></i></button>
           <div className="user" id="user" onClick={showHide}>

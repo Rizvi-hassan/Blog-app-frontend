@@ -15,7 +15,7 @@ const Tile = (props) => {
   const handleClick = () => {
     console.log(data);
     newBlog(data, false);
-    navigate('/blog-page');
+    navigate(`/page/${data._id}`);
   }
 
 

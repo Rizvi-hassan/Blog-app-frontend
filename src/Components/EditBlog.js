@@ -71,7 +71,7 @@ const EditBlog = () => {
             head: imp.head,
             title: imp.title,
             mainImg: imp.mainImg,
-            tag: imp.tag.toUpperCase(),
+            tag: imp.tag.toUpperCase().trim(),
             elements: value
         }
         console.log(data);

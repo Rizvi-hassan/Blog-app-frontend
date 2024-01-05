@@ -8,12 +8,14 @@ const Login = () => {
     const {showAlert, url, fetchName} = context;
     const navigate = useNavigate();
     const [creds, setCreds] = useState({email:"", password:""});
+    const [loading, setLoading] = useState(false);
     const handleChange = (e)=>{
         setCreds({...creds, [e.target.name]:e.target.value});
     }
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
+        setLoading(true);
         const response = await fetch(`${url}/auth/login`, {
                 method: "POST",
     
@@ -25,6 +27,7 @@ const Login = () => {
                 body: JSON.stringify({email:creds.email, password: creds.password}) // body data type must match "Content-Type" 
             });
         const json = await response.json();
+        setLoading(false);
         if (json.attempt === 'success'){
             localStorage.setItem('blog-token', json.token);
             showAlert('success', 'Logged in successfully. Welcome back to B_LOG');
@@ -66,8 +69,8 @@ const Login = () => {
                         <i id="eye" className="fa-solid fa-eye hide-show" onClick={toggleHideShow}></i>
                         <input type='email' className="form-entry" name='email' value={creds.email} onChange={handleChange} placeholder='Enter your email' />
                         <input type="password" id="password" className="form-entry" name='password' value={creds.password} onChange={handleChange} placeholder='Enter your password' required/>
-                        <input type="submit" className="form-btn green" value='Login' />
-                        <Link to='/auth/register' className='link'>New user? Register</Link>
+                        <button type="submit" className="form-btn green" >Login {loading && <span class="gear-box"><i class="fa-solid fa-gear"></i></span>} </button>
+                        <Link to='/register' className='link'>New user? Register</Link>
                         <Link to='/' className='link'>Home</Link>
                     </form>
                 </div>

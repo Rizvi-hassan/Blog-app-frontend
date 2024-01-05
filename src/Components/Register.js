@@ -8,12 +8,14 @@ const Register = () => {
     const {showAlert, url} = context;
     const navigate = useNavigate();
     const [creds, setCreds] = useState({name:"", email:"", password:"", cpassword:""})
+    const [loading, setLoading] = useState(false);
     const handleChange = (e)=>{
         setCreds({...creds, [e.target.name]: e.target.value})
     }
     const handleSubmit = async(e)=>{
         e.preventDefault();
         if(creds.password === creds.cpassword){
+            setLoading(true);
             const response = await fetch(`${url}/auth/adduser`, {
                 method: "POST",
     
@@ -25,6 +27,7 @@ const Register = () => {
                 body: JSON.stringify({name:creds.name,email:creds.email, password: creds.password}) // body data type must match "Content-Type" 
             });
             const json = await response.json();
+            setLoading(false);
             if (json.attempt === 'success'){
                 localStorage.setItem('blog-token', json.token);
                 showAlert('success', 'Registration successfull. Welcome to B_LOG family.');
@@ -73,8 +76,8 @@ const Register = () => {
                         <input type='email' className="form-entry" id='email' name='email' value={creds.email} onChange={handleChange} placeholder='Enter your email' />
                         <input type="password" className="form-entry" id='pass' name='password' value={creds.password} onChange={handleChange} placeholder='Enter your password' />
                         <input type="password" className="form-entry" id='cpass' name='cpassword' value={creds.cpassword} onChange={handleChange} placeholder='Re-enter your password' />
-                        <input type="submit" className="form-btn blue" value='Register' />
-                        <Link to='/auth/login' className='link'>Existing user? Login</Link>
+                        <button type="submit" className="form-btn blue" > Register {loading && <span class="gear-box"><i class="fa-solid fa-gear"></i></span>}</button>
+                        <Link to='/login' className='link'>Existing user? Login</Link>
                     </form>
                 </div>
             </div>

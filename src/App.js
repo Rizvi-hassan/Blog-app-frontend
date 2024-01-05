@@ -12,10 +12,11 @@ import UserState from './Contexts/user/userState'
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Alert from './Components/Alert';
-import YourBlogs from './Components/YourBlogs'
+import Personal from './Components/Personal';
 import EditBlog from './Components/EditBlog';
 
 function App() {
+  let value = '';
   return (
     <div>
       <UserState>
@@ -23,11 +24,11 @@ function App() {
           <Alert/>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/personal' element={<YourBlogs />} />
-            <Route path='/blog-page' element={<Page />} />
-            <Route path='/add-blog' element={<EditBlog />} />
-            <Route path='/auth/login' element={<Login/>}/>
-            <Route path='/auth/register' element={<Register/>} />
+            <Route path='/personal' element={<Personal/>} />
+            <Route path='/page/:id' element={<Page />} />
+            <Route path='/editblog' element={<EditBlog />} />
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/register' element={<Register/>} />
           </Routes>
         </Router>
       </UserState>
