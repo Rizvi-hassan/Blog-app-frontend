@@ -69,7 +69,7 @@ const Login = () => {
                         <i id="eye" className="fa-solid fa-eye hide-show" onClick={toggleHideShow}></i>
                         <input type='email' className="form-entry" name='email' value={creds.email} onChange={handleChange} placeholder='Enter your email' />
                         <input type="password" id="password" className="form-entry" name='password' value={creds.password} onChange={handleChange} placeholder='Enter your password' required/>
-                        <button type="submit" className="form-btn green" >Login {loading && <span class="gear-box"><i class="fa-solid fa-gear"></i></span>} </button>
+                        <button type="submit" className="form-btn green" >Login {loading && <span className="gear-box"><i className="fa-solid fa-gear"></i></span>} </button>
                         <Link to='/register' className='link'>New user? Register</Link>
                         <Link to='/' className='link'>Home</Link>
                     </form>

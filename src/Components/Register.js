@@ -76,7 +76,7 @@ const Register = () => {
                         <input type='email' className="form-entry" id='email' name='email' value={creds.email} onChange={handleChange} placeholder='Enter your email' />
                         <input type="password" className="form-entry" id='pass' name='password' value={creds.password} onChange={handleChange} placeholder='Enter your password' />
                         <input type="password" className="form-entry" id='cpass' name='cpassword' value={creds.cpassword} onChange={handleChange} placeholder='Re-enter your password' />
-                        <button type="submit" className="form-btn blue" > Register {loading && <span class="gear-box"><i class="fa-solid fa-gear"></i></span>}</button>
+                        <button type="submit" className="form-btn blue" > Register {loading && <span className="gear-box"><i className="fa-solid fa-gear"></i></span>}</button>
                         <Link to='/login' className='link'>Existing user? Login</Link>
                     </form>
                 </div>

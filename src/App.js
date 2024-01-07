@@ -1,5 +1,5 @@
-// import logo from './logo.svg';
 import './App.css';
+import './Phone.css';
 import Home from './Components/Home';
 import {
   BrowserRouter as Router,
@@ -7,7 +7,6 @@ import {
   Route
 } from 'react-router-dom';
 import Page from './Components/Page';
-import Addblog from './Components/Addblog';
 import UserState from './Contexts/user/userState'
 import Login from './Components/Login';
 import Register from './Components/Register';
@@ -16,7 +15,6 @@ import Personal from './Components/Personal';
 import EditBlog from './Components/EditBlog';
 
 function App() {
-  let value = '';
   return (
     <div>
       <UserState>
