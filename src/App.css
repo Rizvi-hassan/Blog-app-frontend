@@ -132,6 +132,9 @@
 .arrow{
     display: none ;
 }
+.profile{
+    display: none;
+}
 
 .arrow i{
     color: white;

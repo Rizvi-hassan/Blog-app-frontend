@@ -67,7 +67,7 @@ const Navbar = () => {
       </div>
 
       <div className="search-box">
-        <span>
+        <span className="profile">
         <i className="fa-regular fa-user " style={{color:'white', fontSize:'1.5rem'}} id="userIcon" onClick={handleUserClick}></i>
         </span>
         <div className="btn-box" id="btn-box">
