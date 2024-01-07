@@ -417,7 +417,7 @@
             backdrop-filter: blur(1px);
     border-radius: 0.5rem;
     margin-bottom: 1rem;
-    scale: 0.7;
+    scale: 1;
 }
 
 .form{

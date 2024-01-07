@@ -35,7 +35,8 @@ const YourBlogs = () => {
 
     useEffect(() => {
         if (!localStorage.getItem('blog-token')) {
-            navigate('/auth/login');
+            showAlert("success", "Login to see you blogs.");
+            navigate('/login');
         }
         else {
             fetchdata();
