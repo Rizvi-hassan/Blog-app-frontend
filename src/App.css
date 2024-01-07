@@ -12,6 +12,13 @@
 * Browsers: last 4 version
 */
 
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 * {
     padding: 0;
     margin: 0;
@@ -118,6 +125,8 @@
     display: flex;
     gap: 2rem;
     list-style-type: none;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
     height: fit-content;
 }
 .arrow{
@@ -565,17 +574,36 @@
 .gear-box{
     display: inline-block;
     background: transparent;
-    animation: rotator 2s linear 0s infinite ;
+    -webkit-animation: rotator 2s linear 0s infinite ;
+            animation: rotator 2s linear 0s infinite ;
+}
+
+@-webkit-keyframes rotator {
+    0%{
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+    }
+    50%{
+        -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+    }
+    100%{
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
 }
 
 @keyframes rotator {
     0%{
-        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
     }
     50%{
-        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
     }
     100%{
-        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
     }
 }

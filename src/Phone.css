@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 @media screen and (max-width: 450px) {
     .nav-bar {
         position: relative;
@@ -10,7 +17,11 @@
         left: 0px;
         height: 0;
         overflow: hidden;
-        justify-content: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-transition: height 0.3s ease;
+        -o-transition: height 0.3s ease;
         transition: height 0.3s ease;
     }
     .arrow {
@@ -18,7 +29,11 @@
         color: white;
         /* cursor: pointer; */
         font-size: 1.5rem;
+        -webkit-transition: -webkit-transform 0.3s ease;
+        transition: -webkit-transform 0.3s ease;
+        -o-transition: transform 0.3s ease;
         transition: transform 0.3s ease;
+        transition: transform 0.3s ease, -webkit-transform 0.3s ease;
     }
     .search-box{
         padding:0 2rem;
@@ -28,17 +43,33 @@
         right: 0;
         top: 65px;
         /* background: red; */
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
         gap: 0.5rem;
+        -webkit-transition: -webkit-transform 0.5s ease;
+        transition: -webkit-transform 0.5s ease;
+        -o-transition: transform 0.5s ease;
         transition: transform 0.5s ease;
-        transform: translateX(100%);
+        transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+        -webkit-transform: translateX(100%);
+            -ms-transform: translateX(100%);
+                transform: translateX(100%);
     }
     .btn-primary{
         font-size: 1.1rem;
     }
     .tile-body{
-        flex-direction: column-reverse;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: reverse;
+            -ms-flex-direction: column-reverse;
+                flex-direction: column-reverse;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
         height: fit-content;
     }
     .tile-body .image{
