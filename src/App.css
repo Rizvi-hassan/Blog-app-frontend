@@ -19,6 +19,11 @@
 * Browsers: last 4 version
 */
 
+body, html{
+    max-width: 100%;
+    min-height: 100%;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -48,6 +53,7 @@
 .header {
     width: 95vw;
     min-height: 50vh;
+    overflow: hidden;
     /* max-height: 90vh; */
     /* flex-shrink: 0; */
     border-radius: 0.5rem;
@@ -151,6 +157,10 @@
     color: rgba(255, 255, 255, 0.734);
 }
 
+.btn-box{
+    display: flex;
+}
+
 .btn-primary {
     height: 2rem;
     /* width: 5rem; */
@@ -180,6 +190,7 @@
     width: 70vw;
     display: block;
     margin: 2rem auto;
+    padding-bottom: 2rem;
 }
 
 .container h2 {
@@ -246,6 +257,7 @@
 }
 
 .paragraph {
+    font-size: large;
     margin-bottom: 3rem;
 }
 

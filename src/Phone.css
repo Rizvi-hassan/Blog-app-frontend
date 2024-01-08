@@ -6,20 +6,25 @@
 */
 
 @media screen and (max-width: 560px) {
+    body,
+    html {
+        max-width: 100%;
+        min-height: 100%;
+    }
     .nav-bar {
         position: relative;
     }
     .links ul {
         position: absolute;
-        /* background: pink; */
+        background: #232e52;
         top: 60px;
         width: 95vw;
         left: 0px;
         height: 0;
         overflow: hidden;
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         -webkit-transition: height 0.3s ease;
         -o-transition: height 0.3s ease;
         transition: height 0.3s ease;
@@ -35,29 +40,28 @@
         transition: transform 0.3s ease;
         transition: transform 0.3s ease, -webkit-transform 0.3s ease;
     }
-    .profile{
+    .profile {
         display: block;
     }
-    
-    #userIcon{
-        display: block;
 
+    #userIcon {
+        display: block;
     }
-    .search-box{
-        padding:0 2rem;
+    .search-box {
+        padding: 0 2rem;
     }
     .btn-box {
         position: absolute;
         right: 0;
         top: 65px;
-        /* background: red; */
+        /* background: #232e52; */
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
         gap: 0.5rem;
         -webkit-transition: -webkit-transform 0.5s ease;
         transition: -webkit-transform 0.5s ease;
@@ -65,43 +69,43 @@
         transition: transform 0.5s ease;
         transition: transform 0.5s ease, -webkit-transform 0.5s ease;
         -webkit-transform: translateX(100%);
-            -ms-transform: translateX(100%);
-                transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        transform: translateX(100%);
     }
-    .btn-primary{
+    .btn-primary {
         font-size: 1.1rem;
     }
-    .tile-body{
+    .tile-body {
         -webkit-box-orient: vertical;
         -webkit-box-direction: reverse;
-            -ms-flex-direction: column-reverse;
-                flex-direction: column-reverse;
+        -ms-flex-direction: column-reverse;
+        flex-direction: column-reverse;
         height: -webkit-fit-content;
         height: -moz-fit-content;
         height: fit-content;
     }
-    .tile-body .image{
+    .tile-body .image {
         width: 100%;
     }
 
-    .tile-body .content{
+    .tile-body .content {
         width: 100%;
     }
-    .img-blog{
+    .img-blog {
         max-width: 100%;
     }
-    .image-main{
+    .image-main {
         width: 100%;
         margin: 1rem auto;
     }
-    .container{
+    .container {
         width: 80vw;
     }
-    .link{
+    .link {
         font-size: 1.5rem;
         margin-top: 1.5rem;
     }
-    .content-box{
+    .content-box {
         scale: 0.7;
     }
 }

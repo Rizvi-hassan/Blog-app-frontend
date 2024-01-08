@@ -1,4 +1,4 @@
-import React, { createElement, useContext, useState } from 'react'
+import React, { createElement, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import userContext from '../Contexts/user/userContext';
 import Navbar from './Navbar';
@@ -13,6 +13,8 @@ const EditBlog = () => {
     var key = 0;
     let [value, setValue] = useState(edit.elements);
     let [imp, setImp] = useState({head:edit.head, title: edit.title, mainImg: edit.mainImg , tag: edit.tag});
+    const [loading, setLoading] = useState(false);
+
     let [drop, setDrop] = useState(false);
     let data = {};
 
@@ -63,6 +65,7 @@ const EditBlog = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         console.log("Submit action");
         let response;
         data = {
@@ -99,6 +102,7 @@ const EditBlog = () => {
         }
         const json = await response.json();
         console.log("Data: ", json);
+        setLoading(false);
         if(response.status !== 200){
             showAlert('fail', json.errors.msg);
         }
@@ -111,6 +115,13 @@ const EditBlog = () => {
     const impChange = (e) =>{
         setImp({...imp, [e.target.name]: e.target.value});
     }
+
+    useEffect(()=>{
+        if(!localStorage.getItem('blog-token')){
+            showAlert("success", "You need to login to write a blog.")
+            navigate('/');
+        }
+    })
 
 
     return (
@@ -161,7 +172,7 @@ const EditBlog = () => {
                         </div>
                     </div>
 
-                    <input type="submit" className="btn-sec" value={(isnew)? "Save" : "Update"} />
+                    <button type="submit" className="btn-sec">{(isnew)? "Save" : "Update"} {loading && <span className="gear-box"><i className="fa-solid fa-gear"></i></span>}</button>
                 </form>
             </div>
         </>
