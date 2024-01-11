@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import userContext from '../Contexts/user/userContext';
 
 
 const Navbar = () => {
   const context = useContext(userContext);
+  const location = useLocation();
   const { name } = context;
   const [showL, setShowL] = useState(false);
   const [showBtn, setShwoBtn] = useState(false);
@@ -36,15 +37,14 @@ const Navbar = () => {
     }
   }
 
-  const handleUserClick = ()=>{
-    if(showBtn === false){
+  const handleUserClick = () => {
+    if (showBtn === false) {
       setShwoBtn(true);
       document.getElementById('btn-box').style.transform = 'translateX(0%)';
       document.getElementById('userIcon').classList.toggle('fa-regular');
       document.getElementById('userIcon').classList.toggle('fa-solid');
     }
-    else
-    {
+    else {
       setShwoBtn(false);
       document.getElementById('btn-box').style.transform = 'translateX(100%)';
       document.getElementById('userIcon').classList.toggle('fa-regular');
@@ -68,7 +68,7 @@ const Navbar = () => {
 
       <div className="search-box">
         <span className="profile">
-        <i className="fa-regular fa-user" style={{color:'white', fontSize:'1.5rem'}} id="userIcon" onClick={handleUserClick}></i>
+          <i className="fa-regular fa-user" style={{ color: 'white', fontSize: '1.5rem' }} id="userIcon" onClick={handleUserClick}></i>
         </span>
         <div className="btn-box" id="btn-box">
           {!localStorage.getItem('blog-token') ? <>

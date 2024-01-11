@@ -10,6 +10,7 @@
     html {
         max-width: 100%;
         min-height: 100%;
+        /* overflow: hidden; */
     }
     .nav-bar {
         position: relative;
@@ -107,5 +108,8 @@
     }
     .content-box {
         scale: 0.7;
+    }
+    .paragraph{
+        line-height: 1.5;
     }
 }
