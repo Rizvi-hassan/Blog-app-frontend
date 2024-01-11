@@ -622,3 +622,32 @@ body, html{
                 transform: rotate(360deg);
     }
 }
+
+.code-box{
+    border-radius: 5px;
+    overflow: hidden;
+    color: white;
+    margin: 1rem 0;
+    font-size: small;
+}
+
+.code-heading{
+    background: #5d6574;
+    color: white;
+    padding: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.code-btn-box{
+    cursor: pointer;
+    color: white;
+}
+
+.code-box span{
+    color: white;
+}
+
+.code-box pre code{
+    color: white;
+}

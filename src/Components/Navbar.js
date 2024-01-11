@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import userContext from '../Contexts/user/userContext';
 
 
 const Navbar = () => {
   const context = useContext(userContext);
-  const location = useLocation();
+  // const location = useLocation();
   const { name } = context;
   const [showL, setShowL] = useState(false);
   const [showBtn, setShwoBtn] = useState(false);

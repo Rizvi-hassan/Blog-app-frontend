@@ -12,7 +12,7 @@ const EditBlog = () => {
     const navigate = useNavigate();
     var key = 0;
     let [value, setValue] = useState(edit.elements);
-    let [imp, setImp] = useState({head:edit.head, title: edit.title, mainImg: edit.mainImg , tag: edit.tag});
+    let [imp, setImp] = useState({ head: edit.head, title: edit.title, mainImg: edit.mainImg, tag: edit.tag });
     const [loading, setLoading] = useState(false);
 
     let [drop, setDrop] = useState(false);
@@ -28,6 +28,12 @@ const EditBlog = () => {
             setValue(value.concat([['h2', 'Enter the subheading', value.length]]))
             console.log(value, key)
         }
+        else if(what === 'Code'){
+            setValue(value.concat([['Code', 'Enter the code', value.length]]))
+            console.log(value, key)
+            
+        }
+
         else {
             setValue(value.concat([['img', 'Enter link to the image', value.length]]))
             console.log(value, key)
@@ -78,46 +84,45 @@ const EditBlog = () => {
             elements: value
         }
         console.log(data);
-        if(isnew)
-        {
+        if (isnew) {
             response = await fetch(`${url}/blog/addblog`, {
-                method:'POST',
-                headers:{
-                    'Content-Type':'application/json',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
                     'auth-token': localStorage.getItem('blog-token')
                 },
                 body: JSON.stringify(data)
             })
         }
-        else{
+        else {
             response = await fetch(`${url}/blog/updateblog/${edit._id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
                     'auth-token': localStorage.getItem('blog-token')
                 },
-    
+
                 body: JSON.stringify(data)
             })
         }
         const json = await response.json();
         console.log("Data: ", json);
         setLoading(false);
-        if(response.status !== 200){
+        if (response.status !== 200) {
             showAlert('fail', json.errors.msg);
         }
-        else{
+        else {
             showAlert('success', 'Blog updated successfully.');
             navigate('/personal');
         }
     }
 
-    const impChange = (e) =>{
-        setImp({...imp, [e.target.name]: e.target.value});
+    const impChange = (e) => {
+        setImp({ ...imp, [e.target.name]: e.target.value });
     }
 
-    useEffect(()=>{
-        if(!localStorage.getItem('blog-token')){
+    useEffect(() => {
+        if (!localStorage.getItem('blog-token')) {
             showAlert("success", "You need to login to write a blog.")
             navigate('/');
         }
@@ -128,7 +133,7 @@ const EditBlog = () => {
         <>
             <Navbar />
             <div className="container">
-                <h1 className="main-heading">{(isnew)? "New Blog" : "Edit Blog"}</h1>
+                <h1 className="main-heading">{(isnew) ? "New Blog" : "Edit Blog"}</h1>
                 <form action="post" onSubmit={handleSubmit}>
                     <span className='date'>{date.format("MMMM DD, YYYY")}</span>
                     <div className="box">
@@ -160,19 +165,25 @@ const EditBlog = () => {
                             <button className="btn-sec" type="button" onClick={handleClick}>Add element<i id="arrow" className="fa-solid fa-angle-right icon" ></i></button>
                             <div id="elements-list" >
                                 <div className="element transition" onClick={() => {
-                                    addElement('p')
-                                }}><i className="fa-solid fa-plus icon"></i>Paragraph</div>
-                                <div className="element transition" onClick={() => {
                                     addElement('h2')
                                 }}><i className="fa-solid fa-plus icon"></i>Sub-heading</div>
+
+                                <div className="element transition" onClick={() => {
+                                    addElement('p')
+                                }}><i className="fa-solid fa-plus icon"></i>Paragraph</div>
+
                                 <div className="element transition" onClick={() => {
                                     addElement('img')
                                 }}><i className="fa-solid fa-plus icon"></i>Image</div>
+
+                                <div className="element transition" onClick={() => {
+                                    addElement('Code')
+                                }}><i className="fa-solid fa-plus icon"></i>Code</div>
                             </div>
                         </div>
                     </div>
 
-                    <button type="submit" className="btn-sec">{(isnew)? "Save" : "Update"} {loading && <span className="gear-box"><i className="fa-solid fa-gear"></i></span>}</button>
+                    <button type="submit" className="btn-sec">{(isnew) ? "Save" : "Update"} {loading && <span className="gear-box"><i className="fa-solid fa-gear"></i></span>}</button>
                 </form>
             </div>
         </>
