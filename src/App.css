@@ -187,7 +187,7 @@ body, html{
 
 .container {
     /* border: 2px solid; */
-    width: 70vw;
+    width: 80vw;
     display: block;
     margin: 2rem auto;
     padding-bottom: 2rem;
@@ -195,6 +195,7 @@ body, html{
 
 .container h2 {
     font-size: 2rem;
+    padding-top: 3rem;
 }
 
 .tile {
@@ -247,8 +248,8 @@ body, html{
 .tile-body .image {
     width: 30%;
     border-radius: 5px;
-    -o-object-fit: cover;
-       object-fit: cover;
+    -o-object-fit: contain;
+       object-fit: contain;
 }
 
 .main-heading {
@@ -258,7 +259,7 @@ body, html{
 
 .paragraph {
     font-size: large;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 .img-blog {
@@ -553,6 +554,8 @@ body, html{
 .image-main{
     width: 70vw;
     height: 40vw;
+    display: block;
+    margin: 1rem auto;
     -o-object-fit: contain;
        object-fit: contain;
 }

@@ -14,6 +14,7 @@ import Alert from './Components/Alert';
 import Personal from './Components/Personal';
 import EditBlog from './Components/EditBlog';
 
+
 function App() {
   return (
     <div>
@@ -30,6 +31,7 @@ function App() {
           </Routes>
         </Router>
       </UserState>
+
     </div>
   );
 }

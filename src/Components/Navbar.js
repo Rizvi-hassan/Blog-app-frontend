@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import userContext from '../Contexts/user/userContext';
 
 
 const Navbar = () => {
   const context = useContext(userContext);
-  // const location = useLocation();
+  const location = useLocation();
   const { name } = context;
   const [showL, setShowL] = useState(false);
   const [showBtn, setShwoBtn] = useState(false);
@@ -45,13 +45,21 @@ const Navbar = () => {
       document.getElementById('userIcon').classList.toggle('fa-solid');
     }
     else {
-      setShwoBtn(false);
-      document.getElementById('btn-box').style.transform = 'translateX(100%)';
-      document.getElementById('userIcon').classList.toggle('fa-regular');
-      document.getElementById('userIcon').classList.toggle('fa-solid');
+      if (location.pathname.substring(1, 5) !== 'page') {
+        setShwoBtn(false);
+        document.getElementById('btn-box').style.transform = 'translateX(100%)';
+        document.getElementById('userIcon').classList.toggle('fa-regular');
+        document.getElementById('userIcon').classList.toggle('fa-solid');
+      }
     }
   }
-
+  useEffect(() => {
+    if(location.pathname.substring(1, 5) === 'page'){
+      handleUserClick();
+      document.getElementById('btn-box').style.display = 'none';
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="nav-bar">
@@ -66,27 +74,28 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className="search-box">
-        <span className="profile">
-          <i className="fa-regular fa-user" style={{ color: 'white', fontSize: '1.5rem' }} id="userIcon" onClick={handleUserClick}></i>
-        </span>
-        <div className="btn-box" id="btn-box">
-          {!localStorage.getItem('blog-token') ? <>
-            <button className="btn-primary transition" onClick={() => navigate('/register')}>Register</button>
-            <button className="btn-primary transition" onClick={() => navigate('/login')}>Login</button>
-          </> : <>
-            <button className="btn-primary transition" onClick={goToAdd}>Add Blog <i className="fa-solid fa-plus icon" style={{ padding: '0' }}></i></button>
-            <div className="user" id="user" onClick={showHide}>
-              <div className="user-icon"><i className="fa-solid fa-user" style={{ color: 'white', fontSize: '1.5rem' }}></i></div>
-              <div className="name" id="name" >{name}
-                <button className="btn-danger transition" onClick={handleLogOut} >Logout</button>
+      
+        <div className="search-box">
+          <span className="profile">
+            <i className="fa-regular fa-user" style={{ color: 'white', fontSize: '1.5rem' }} id="userIcon" onClick={handleUserClick}></i>
+          </span>
+          <div className="btn-box" id="btn-box">
+            {!localStorage.getItem('blog-token') ? <>
+              <button className="btn-primary transition" onClick={() => navigate('/register')}>Register</button>
+              <button className="btn-primary transition" onClick={() => navigate('/login')}>Login</button>
+            </> : <>
+              <button className="btn-primary transition" onClick={goToAdd}>Add Blog <i className="fa-solid fa-plus icon" style={{ padding: '0' }}></i></button>
+              <div className="user" id="user" onClick={showHide}>
+                <div className="user-icon"><i className="fa-solid fa-user" style={{ color: 'white', fontSize: '1.5rem' }}></i></div>
+                <div className="name" id="name" >{name}
+                  <button className="btn-danger transition" onClick={handleLogOut} >Logout</button>
+                </div>
               </div>
-            </div>
-          </>
-          }
-        </div>
+            </>
+            }
 
-      </div>
+          </div>
+        </div>
     </div>
   )
 }

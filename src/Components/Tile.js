@@ -29,7 +29,7 @@ const Tile = (props) => {
           <span className="date">{date.format("MMMM DD, YYYY")}</span>
           <h3>{data.head}</h3>
           <p className="desc">{(data.title.length > 130) ? data.title.substring(0, 129) + "..." : data.title}</p>
-          <span onClick={handleClick} style={{ fontWeight: '700', textDecoration: 'none', cursor: 'pointer' }}>Read More <i className="fa-solid fa-square-up-right"></i></span>
+          <span onClick={handleClick} style={{ fontWeight: '700', textDecoration: 'none', cursor: 'pointer', color:"#413aac", fontSize:'1.1rem' }}>Read More <i className="fa-solid fa-square-up-right" style={{color:'#413aac'}}></i></span>
           <span className="author"> &#8213; {data.author}</span>
         </div>
         <img src={data.mainImg} alt='img' className="image"></img>
