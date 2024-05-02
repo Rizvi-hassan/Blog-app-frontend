@@ -7,7 +7,7 @@ import Loading from './Loading'
 const Home = () => {
   const context = useContext(userContext);
   const [data, setData] = useState([])
-  const { url, showAlert, fetchName, name, showLoading } = context;
+  const { url, showAlert, fetchName, name, showLoading, loading } = context;
   const fetchdata = async () => {
     try{
       showLoading(true);
@@ -52,10 +52,10 @@ const Home = () => {
       <div className='container'>
         <h2>Home</h2>
         <Loading/>
-        {(data.length === 0) && <span>End of page</span>}
         {data.map((val) => {
           return <Tile key={val._id} data={val} />
         })}
+        {!loading?  <span>End of page</span> : null}
       </div>
     </>
   )

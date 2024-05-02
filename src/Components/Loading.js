@@ -6,7 +6,16 @@ const Loading = () => {
     const { loading } = context;
     return (
         <>
-            {(loading) && <div className='loading'></div>}
+
+            {loading || 1 === 1 ?
+                <div className='loader'>
+                    <p className='load-text'>Loading
+                        <span className="load-dots" id="dot1"></span>
+                        <span className="load-dots" id="dot2"></span>
+                        <span className="load-dots" id="dot3"></span>
+                    </p>
+                    <div className='loading'></div>
+                </div> : null}
         </>
     )
 }
