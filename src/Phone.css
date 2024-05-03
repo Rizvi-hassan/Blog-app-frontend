@@ -112,4 +112,9 @@
     .paragraph{
         line-height: 1.5;
     }
+
+    .back{
+        display: none;
+        visibility: hidden;
+    }
 }

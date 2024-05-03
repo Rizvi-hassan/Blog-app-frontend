@@ -591,6 +591,8 @@ html {
 
 .loader {
     text-align: center;
+    text-align: center;
+    margin: 1rem 0;
 }
 
 .loading {

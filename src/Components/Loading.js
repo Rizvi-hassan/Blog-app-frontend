@@ -7,7 +7,7 @@ const Loading = () => {
     return (
         <>
 
-            {loading || 1 === 1 ?
+            {loading ?
                 <div className='loader'>
                     <p className='load-text'>Loading
                         <span className="load-dots" id="dot1"></span>
