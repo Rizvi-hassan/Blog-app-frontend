@@ -17,7 +17,7 @@ const Navbar = () => {
   }
 
   const goToAdd = () => {
-    navigate('/editblog')
+    navigate('/newblog')
   }
 
   const handleLogOut = () => {

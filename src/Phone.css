@@ -14,6 +14,7 @@
     }
     .nav-bar {
         position: relative;
+        /* overflow-x: hidden; */
     }
     .links ul {
         position: absolute;

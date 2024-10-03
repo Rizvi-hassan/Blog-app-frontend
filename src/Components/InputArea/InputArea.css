@@ -1,0 +1,14 @@
+.box-head{
+    /* border: 1px solid; */
+        display: flex;
+        justify-content: space-between;
+}
+.delete-element{
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+
+@media screen and (max-width: 560px) {
+
+}

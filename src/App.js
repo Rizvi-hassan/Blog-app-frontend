@@ -12,7 +12,8 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import Alert from './Components/Alert';
 import Personal from './Components/Personal';
-import EditBlog from './Components/EditBlog';
+import EditBlog from './Components/EditBlog/EditBlog';
+import Addblog from './Components/Addblog/Addblog';
 
 
 function App() {
@@ -20,14 +21,15 @@ function App() {
     <div>
       <UserState>
         <Router>
-          <Alert/>
+          <Alert />
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/personal' element={<Personal/>} />
+            <Route path='/personal' element={<Personal />} />
             <Route path='/page/:id' element={<Page />} />
             <Route path='/editblog' element={<EditBlog />} />
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/register' element={<Register/>} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/newblog' element={<Addblog />} />
           </Routes>
         </Router>
       </UserState>

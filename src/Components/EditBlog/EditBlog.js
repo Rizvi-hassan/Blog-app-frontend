@@ -1,18 +1,20 @@
-import React, { createElement, useContext, useEffect, useState } from 'react'
+import React, {  useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import userContext from '../Contexts/user/userContext';
-import Navbar from './Navbar';
+import userContext from '../../Contexts/user/userContext';
+import Navbar from '../Navbar';
 import DateObject from "react-date-object";
+import InputArea from '../InputArea/InputArea';
+import './EditBlog.css';
 
 const EditBlog = () => {
     const context = useContext(userContext);
     var date = new DateObject();
     const { name, showAlert, edit, url } = context;
-    const isnew = edit.isnew;
+    // const isnew = edit.isnew;  -- not needed as adblog handles new blogs
     const navigate = useNavigate();
-    var key = 0;
     let [value, setValue] = useState(edit.elements);
     let [imp, setImp] = useState({ head: edit.head, title: edit.title, mainImg: edit.mainImg, tag: edit.tag });
+    // to activate loader in submit btn
     const [loading, setLoading] = useState(false);
 
     let [drop, setDrop] = useState(false);
@@ -20,26 +22,33 @@ const EditBlog = () => {
 
     const addElement = (what) => {
         if (what === 'p') {
-            setValue(value.concat([['p', 'Enter the content of paragraph', value.length]]));
-            console.log(value, key)
+            setValue(value.concat([['p', '', value.length]]));
+            // console.log(value, key)
 
         }
         else if (what === 'h2') {
-            setValue(value.concat([['h2', 'Enter the subheading', value.length]]))
-            console.log(value, key)
+            setValue(value.concat([['h2', '', value.length]]))
+            // console.log(value, key)
         }
-        else if(what === 'Code'){
-            setValue(value.concat([['Code', 'Enter the code', value.length]]))
-            console.log(value, key)
-            
+        else if (what === 'Code') {
+            setValue(value.concat([['Code', '', value.length]]))
+            // console.log(value, key)
+
         }
 
         else {
-            setValue(value.concat([['img', 'Enter link to the image', value.length]]))
-            console.log(value, key)
+            setValue(value.concat([['img', '', value.length]]))
+            // console.log(value, key)
         }
         handleClick();
     }
+
+    const delete_element = (val) => {
+        setValue(value.filter((v) => {
+            return v !== val;
+        }));
+    }
+
 
     const handleClick = () => {
         if (drop === false) {
@@ -56,7 +65,7 @@ const EditBlog = () => {
 
     }
 
-    const onChange = (e) => {
+    const onchange = (e) => {
         let temp = value.map((val) => {
             if (val[2] === parseInt(e.target.name)) {
                 return [val[0], e.target.value, val[2]];
@@ -83,28 +92,19 @@ const EditBlog = () => {
             tag: imp.tag.toUpperCase().trim(),
             elements: value
         }
-        console.log(data);
-        if (isnew) {
-            response = await fetch(`${url}/blog/addblog`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'auth-token': localStorage.getItem('blog-token')
-                },
-                body: JSON.stringify(data)
-            })
-        }
-        else {
-            response = await fetch(`${url}/blog/updateblog/${edit._id}`, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json',
-                    'auth-token': localStorage.getItem('blog-token')
-                },
+        // console.log(data);
 
-                body: JSON.stringify(data)
-            })
-        }
+
+        response = await fetch(`${url}/blog/updateblog/${edit._id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                'auth-token': localStorage.getItem('blog-token')
+            },
+
+            body: JSON.stringify(data)
+        })
+
         const json = await response.json();
         console.log("Data: ", json);
         setLoading(false);
@@ -128,12 +128,36 @@ const EditBlog = () => {
         }
     })
 
+    const reset_val = () => {
+        setValue([]);
+        setImp({ head: "", title: "", mainImg: "", tag: "" });
+        document.getElementsByClassName('check-btn')[0].classList.remove('check-btn-move');
+        document.getElementsByClassName('check-box')[0].classList.remove('check-box-move');
+    }
+
+    const go_back = () => {
+        console.log("Go back");
+        navigate(-1);
+    }
+
+    const check_toggle = () => {
+        const default_img = "https://pbwebdev.co.uk/wp-content/uploads/2018/12/blogs.jpg";
+        document.getElementsByClassName('check-btn')[0].classList.toggle('check-btn-move');
+        document.getElementsByClassName('check-box')[0].classList.toggle('check-box-move');
+        if (imp.mainImg !== default_img) {
+            setImp({ ...imp, mainImg: default_img });
+        }
+        else {
+            setImp({ ...imp, mainImg: "" });
+        }
+    }
+
 
     return (
         <>
             <Navbar />
             <div className="container">
-                <h1 className="main-heading">{(isnew) ? "New Blog" : "Edit Blog"}</h1>
+                <h1 className="main-heading">Edit Blog</h1>
                 <form action="post" onSubmit={handleSubmit}>
                     <span className='date'>{date.format("MMMM DD, YYYY")}</span>
                     <div className="box">
@@ -147,6 +171,13 @@ const EditBlog = () => {
 
                     <div className="box">
                         <label htmlFor="mainImg" className="label">Enter link to the main image.</label>
+
+                        <div className='default-check'>
+                            <span>Default</span> <div className='check-box' onClick={check_toggle}>
+                                <div className='check-btn'></div>
+                            </div>
+                        </div>
+
                         <textarea className="content text-box" name="mainImg" id="mainImg" rows="2" required value={imp.mainImg} onChange={impChange}></textarea>
                     </div>
                     <div className="box">
@@ -158,7 +189,7 @@ const EditBlog = () => {
                         <h2>Elements</h2>
                         {value.map((val) => {
                             return (
-                                createElement('textarea', { className: 'content text-box', name: val[2], key: "element" + val[2], value: value[val[2]][1], onChange }, val[1])
+                                <InputArea key={val[2]} val={val} onchange={onchange} delete_element={delete_element} />
                             )
                         })}
                         <div className="dropdown">
@@ -183,7 +214,11 @@ const EditBlog = () => {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn-sec">{(isnew) ? "Save" : "Update"} {loading && <span className="gear-box"><i className="fa-solid fa-gear"></i></span>}</button>
+                    <ul className='submit-box'>
+                        <button type="submit" className="btn-sec submit">Add blog{loading && <span className="gear-box"><i className="fa-solid fa-gear"></i></span>}</button>
+                        <button type="button" className="btn-sec reset" onClick={reset_val}>Reset</button>
+                        <button type="button" className="btn-sec " onClick={go_back}>Cancel</button>
+                    </ul>
                 </form>
             </div>
         </>

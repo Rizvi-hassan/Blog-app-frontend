@@ -34,7 +34,7 @@ const Code = (props) => {
                 }
 
             </div>
-            <SyntaxHighlighter language='jsx' style={nightOwl} showLineNumbers={true}>
+            <SyntaxHighlighter language='c' style={nightOwl} showLineNumbers={true}>
                 {codeString}
             </SyntaxHighlighter>
 
