@@ -47,7 +47,7 @@ const UserState = (props) => {
             });
             const out = await response.json();
             setName(out.user.name);
-            console.log(out)
+            // console.log(out)
             
         } catch (error) {
             console.log(error);

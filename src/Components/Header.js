@@ -7,7 +7,7 @@ const Header = () => {
     const [q, setQuote] = useState({quote: '...', author:'...'});
     const fetchquote = async () => {
         try {
-            const response = await fetch('https://api.api-ninjas.com/v1/quotes?category=happiness', {
+            const response = await fetch('https://api.api-ninjas.com/v1/quotes?', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
