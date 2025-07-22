@@ -10,8 +10,8 @@ const UserState = (props) => {
     const [blog, setBlog] = useState({});
     const [name, setName] = useState('');
     const [edit, setEdit] = useState({ _id: '', head: '', author: name, title: '', mainImg: '', tag: '', elements: [], isnew: true });
-    // const url = 'http://localhost:5000';
-    const url = 'https://blog-app-backend-fr80.onrender.com';
+    const url = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080'; // Default to localhost if not set
+    // const url = 'https://blog-app-backend-fr80.onrender.com';
     const showAlert = (type, msg) => {
         setAlert({ state: true, type, msg })
         setTimeout(() => {
